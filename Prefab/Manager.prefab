@@ -1,0 +1,217 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3089870696322497942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6514423804004085853}
+  - component: {fileID: 8298979967425341937}
+  - component: {fileID: 1870567284385242547}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6514423804004085853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3089870696322497942}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.15, z: -8.52}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8298979967425341937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3089870696322497942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01cdae0b8175fcc43942fa1004836881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _udonSharpBackingUdonBehaviour: {fileID: 1870567284385242547}
+  metaUrl:
+    url: http://localhost:8000/atlas
+  atlasUrls:
+  - url: http://localhost:8000/atlas/0
+  - url: http://localhost:8000/atlas/1
+  - url: http://localhost:8000/atlas/2
+  - url: http://localhost:8000/atlas/3
+  - url: http://localhost:8000/atlas/4
+  - url: http://localhost:8000/atlas/5
+  - url: http://localhost:8000/atlas/6
+  - url: http://localhost:8000/atlas/7
+  - url: http://localhost:8000/atlas/8
+  - url: http://localhost:8000/atlas/9
+  - url: http://localhost:8000/atlas/10
+  - url: http://localhost:8000/atlas/11
+  - url: http://localhost:8000/atlas/12
+  - url: http://localhost:8000/atlas/13
+  - url: http://localhost:8000/atlas/14
+  - url: http://localhost:8000/atlas/15
+  - url: http://localhost:8000/atlas/16
+  - url: http://localhost:8000/atlas/17
+  - url: http://localhost:8000/atlas/18
+  - url: http://localhost:8000/atlas/19
+  - url: http://localhost:8000/atlas/20
+  - url: http://localhost:8000/atlas/21
+  - url: http://localhost:8000/atlas/22
+  - url: http://localhost:8000/atlas/23
+  - url: http://localhost:8000/atlas/24
+  - url: http://localhost:8000/atlas/25
+  - url: http://localhost:8000/atlas/26
+  - url: http://localhost:8000/atlas/27
+  - url: http://localhost:8000/atlas/28
+  - url: http://localhost:8000/atlas/29
+  - url: http://localhost:8000/atlas/30
+  - url: http://localhost:8000/atlas/31
+  - url: http://localhost:8000/atlas/32
+  - url: http://localhost:8000/atlas/33
+  - url: http://localhost:8000/atlas/34
+  - url: http://localhost:8000/atlas/35
+  - url: http://localhost:8000/atlas/36
+  - url: http://localhost:8000/atlas/37
+  - url: http://localhost:8000/atlas/38
+  - url: http://localhost:8000/atlas/39
+  - url: http://localhost:8000/atlas/40
+  - url: http://localhost:8000/atlas/41
+  - url: http://localhost:8000/atlas/42
+  - url: http://localhost:8000/atlas/43
+  - url: http://localhost:8000/atlas/44
+  - url: http://localhost:8000/atlas/45
+  - url: http://localhost:8000/atlas/46
+  - url: http://localhost:8000/atlas/47
+  - url: http://localhost:8000/atlas/48
+  - url: http://localhost:8000/atlas/49
+  - url: http://localhost:8000/atlas/50
+  - url: http://localhost:8000/atlas/51
+  - url: http://localhost:8000/atlas/52
+  - url: http://localhost:8000/atlas/53
+  - url: http://localhost:8000/atlas/54
+  - url: http://localhost:8000/atlas/55
+  - url: http://localhost:8000/atlas/56
+  - url: http://localhost:8000/atlas/57
+  - url: http://localhost:8000/atlas/58
+  - url: http://localhost:8000/atlas/59
+  - url: http://localhost:8000/atlas/60
+  - url: http://localhost:8000/atlas/61
+  - url: http://localhost:8000/atlas/62
+  - url: http://localhost:8000/atlas/63
+  - url: http://localhost:8000/atlas/64
+  - url: http://localhost:8000/atlas/65
+  - url: http://localhost:8000/atlas/66
+  - url: http://localhost:8000/atlas/67
+  - url: http://localhost:8000/atlas/68
+  - url: http://localhost:8000/atlas/69
+  - url: http://localhost:8000/atlas/70
+  - url: http://localhost:8000/atlas/71
+  - url: http://localhost:8000/atlas/72
+  - url: http://localhost:8000/atlas/73
+  - url: http://localhost:8000/atlas/74
+  - url: http://localhost:8000/atlas/75
+  - url: http://localhost:8000/atlas/76
+  - url: http://localhost:8000/atlas/77
+  - url: http://localhost:8000/atlas/78
+  - url: http://localhost:8000/atlas/79
+  - url: http://localhost:8000/atlas/80
+  - url: http://localhost:8000/atlas/81
+  - url: http://localhost:8000/atlas/82
+  - url: http://localhost:8000/atlas/83
+  - url: http://localhost:8000/atlas/84
+  - url: http://localhost:8000/atlas/85
+  - url: http://localhost:8000/atlas/86
+  - url: http://localhost:8000/atlas/87
+  - url: http://localhost:8000/atlas/88
+  - url: http://localhost:8000/atlas/89
+  - url: http://localhost:8000/atlas/90
+  - url: http://localhost:8000/atlas/91
+  - url: http://localhost:8000/atlas/92
+  - url: http://localhost:8000/atlas/93
+  - url: http://localhost:8000/atlas/94
+  - url: http://localhost:8000/atlas/95
+  - url: http://localhost:8000/atlas/96
+  - url: http://localhost:8000/atlas/97
+  - url: http://localhost:8000/atlas/98
+  - url: http://localhost:8000/atlas/99
+  - url: http://localhost:8000/atlas/100
+  - url: http://localhost:8000/atlas/101
+  - url: http://localhost:8000/atlas/102
+  - url: http://localhost:8000/atlas/103
+  - url: http://localhost:8000/atlas/104
+  - url: http://localhost:8000/atlas/105
+  - url: http://localhost:8000/atlas/106
+  - url: http://localhost:8000/atlas/107
+  - url: http://localhost:8000/atlas/108
+  - url: http://localhost:8000/atlas/109
+  - url: http://localhost:8000/atlas/110
+  - url: http://localhost:8000/atlas/111
+  - url: http://localhost:8000/atlas/112
+  - url: http://localhost:8000/atlas/113
+  - url: http://localhost:8000/atlas/114
+  - url: http://localhost:8000/atlas/115
+  - url: http://localhost:8000/atlas/116
+  - url: http://localhost:8000/atlas/117
+  - url: http://localhost:8000/atlas/118
+  - url: http://localhost:8000/atlas/119
+  - url: http://localhost:8000/atlas/120
+  - url: http://localhost:8000/atlas/121
+  - url: http://localhost:8000/atlas/122
+  - url: http://localhost:8000/atlas/123
+  - url: http://localhost:8000/atlas/124
+  - url: http://localhost:8000/atlas/125
+  - url: http://localhost:8000/atlas/126
+  - url: http://localhost:8000/atlas/127
+  posters:
+  - {fileID: 0}
+  material: {fileID: 2100000, guid: 93006ccbe0a383a49832d200eb3d78f7, type: 2}
+--- !u!114 &1870567284385242547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3089870696322497942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45115577ef41a5b4ca741ed302693907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTextPlacement: {fileID: 0}
+  interactText: Use
+  interactTextGO: {fileID: 0}
+  proximity: 2
+  SynchronizePosition: 0
+  AllowCollisionOwnershipTransfer: 0
+  Reliable: 0
+  _syncMethod: 1
+  serializedProgramAsset: {fileID: 11400000, guid: 01cb767117ccd0f4798daecf79ed5bee,
+    type: 2}
+  programSource: {fileID: 11400000, guid: 43871bcfedaaebd44858f63f303c0543, type: 2}
+  serializedPublicVariablesBytesString: Ai8AAAAAATIAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAFQAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AAAAAAAYBAAAAAAAAACcBBAAAAHQAeQBwAGUAAWgAAABTAHkAcwB0AGUAbQAuAEMAbwBsAGwAZQBjAHQAaQBvAG4AcwAuAEcAZQBuAGUAcgBpAGMALgBMAGkAcwB0AGAAMQBbAFsAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4ALgBJAG4AdABlAHIAZgBhAGMAZQBzAC4ASQBVAGQAbwBuAFYAYQByAGkAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AXQBdACwAIABtAHMAYwBvAHIAbABpAGIAAQEJAAAAVgBhAHIAaQBhAGIAbABlAHMALwEAAAABaAAAAFMAeQBzAHQAZQBtAC4AQwBvAGwAbABlAGMAdABpAG8AbgBzAC4ARwBlAG4AZQByAGkAYwAuAEwAaQBzAHQAYAAxAFsAWwBWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAEkAbgB0AGUAcgBmAGEAYwBlAHMALgBJAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlACwAIABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgBdAF0ALAAgAG0AcwBjAG8AcgBsAGkAYgABAAAABgEAAAAAAAAAAi8CAAAAAUkAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAGAAMQBbAFsAUwB5AHMAdABlAG0ALgBJAG4AdAAzADIALAAgAG0AcwBjAG8AcgBsAGkAYgBdAF0ALAAgAFYAUgBDAC4AVQBkAG8AbgAuAEMAbwBtAG0AbwBuAAIAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAR8AAABfAF8AXwBVAGQAbwBuAFMAaABhAHIAcABCAGUAaABhAHYAaQBvAHUAcgBWAGUAcgBzAGkAbwBuAF8AXwBfACcBBAAAAHQAeQBwAGUAARYAAABTAHkAcwB0AGUAbQAuAEkAbgB0ADMAMgAsACAAbQBzAGMAbwByAGwAaQBiABcBBQAAAFYAYQBsAHUAZQACAAAABwUHBQcF
+  publicVariablesUnityEngineObjects: []
+  publicVariablesSerializationDataFormat: 0

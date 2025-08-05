@@ -1,0 +1,39 @@
+{
+  "name": "fr.hactazia.posters",
+  "displayName": "Hactazia - Posters",
+  "version": "1.0.0",
+  "unity": "2022.3",
+  "description": "A Unity package for managing dynamic poster displays in VRChat worlds using Udon Sharp. Features texture atlas support, web API integration, and automated content management tools.",
+  "keywords": [
+    "VRChat",
+    "Udon",
+    "UdonSharp",
+    "Posters",
+    "Dynamic Content",
+    "Texture Atlas",
+    "Image Loading",
+    "VRC SDK3"
+  ],
+  "bugs": {
+    "url": "https://github.com/hactazia/udon-tools/issues"
+  },
+  "author": {
+    "name": "Hactazia",
+    "url": "https://github.com/hactazia",
+    "discord": "hactazia",
+    "email": "hactazia@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hactazia/udon-posters.git"
+  },
+  "vpmDependencies": {
+    "com.vrchat.worlds": "^3.8.2",
+    "com.vrchat.base": "^3.8.2"
+  },
+  "dependencies": {
+    "com.unity.modules.ui": "1.0.0",
+    "com.unity.textmeshpro": "2.1.6"
+  }
+}
