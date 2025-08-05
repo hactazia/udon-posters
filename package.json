@@ -1,7 +1,7 @@
 {
   "name": "fr.hactazia.udon-posters",
   "displayName": "Hactazia - Posters",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "unity": "2022.3",
   "description": "A Unity package for managing dynamic poster displays in VRChat worlds using Udon Sharp. Features texture atlas support, web API integration, and automated content management tools.",
   "keywords": [
