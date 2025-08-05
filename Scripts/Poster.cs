@@ -3,10 +3,8 @@ using System.Globalization;
 using TMPro;
 using UdonSharp;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using VRC.Economy;
-using VRC.PackageManagement.Core;
 using VRC.SDK3.Components;
 using VRC.SDK3.Data;
 using VRC.SDKBase;
@@ -266,11 +264,7 @@ namespace Hactazia.Posters {
 				if (string.IsNullOrEmpty(t)) continue;
 				var parts = t.Split(',');
 				if (parts.Length < 1) continue;
-				if (!int.TryParse(parts[0], out var scale) || scale >= _current) {
-					Debug.LogWarning($"Poster: Invalid scale '{parts[0]}' in '{t}' for poster '{title}' at index {_index}");
-					continue;
-				}
-
+				if (!int.TryParse(parts[0], out var scale) || scale >= _current) continue;
 				var newArray = new int[scalesArray.Length + 1];
 				Array.Copy(scalesArray, newArray, scalesArray.Length);
 				newArray[newArray.Length - 1] = scale;

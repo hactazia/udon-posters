@@ -17,7 +17,7 @@ def compress_atlas_data(data):
     Équivalent de la fonction PHP compressAtlasData
     """
     compressed_data = {
-        'mapping': {},
+        'mapping': [],
         'atlases': []
     }
     
@@ -28,7 +28,7 @@ def compress_atlas_data(data):
     # Utiliser l'ordre des métadonnées pour déterminer les index
     for image_name, metadata in data['metadata'].items():
         image_name_to_index[image_name] = image_index
-        compressed_data['mapping'][str(image_index)] = metadata
+        compressed_data['mapping'].append(metadata)
         image_index += 1
 
     # Compresser les atlas

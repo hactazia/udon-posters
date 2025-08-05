@@ -15,15 +15,18 @@ namespace Hactazia.Posters {
 		public int    atlasCount = PosterManagerEditor.AtlasCount;
 		#endif
 
-		[HideInInspector] public VRCUrl   metaUrl;
-		[HideInInspector] public VRCUrl[] atlasUrls;
-		[HideInInspector] public Poster[] posters;
-		[HideInInspector] public Material material;
+		[HideInInspector] public VRCUrl             metaUrl;
+		[HideInInspector] public VRCUrl[]           atlasUrls;
+		[HideInInspector] public Poster[]           posters;
+		[HideInInspector] public Material           material;
+		private                  VRCImageDownloader m;
 
 		public override void OnPlayerJoined(VRCPlayerApi player) {
 			if (!player.isLocal) return;
 			// ReSharper disable once SuspiciousTypeConversion.Global
 			VRCStringDownloader.LoadUrl(metaUrl, (IUdonEventReceiver)this);
+			if (m != null) m.Dispose();
+			m = new VRCImageDownloader();
 		}
 
 		private bool IsAtlasUrl(VRCUrl url) {
@@ -48,6 +51,7 @@ namespace Hactazia.Posters {
 
 		public override void OnImageLoadSuccess(IVRCImageDownload result) {
 			if (!IsAtlasUrl(result.Url)) return;
+			NextUrl();
 			var texture    = result.Result;
 			var atlasIndex = GetAtlasIndex(result.Url);
 			foreach (var poster in posters)
@@ -56,6 +60,7 @@ namespace Hactazia.Posters {
 
 		public override void OnImageLoadError(IVRCImageDownload result) {
 			if (!IsAtlasUrl(result.Url)) return;
+			NextUrl();
 			var atlasIndex = GetAtlasIndex(result.Url);
 			foreach (var poster in posters)
 				poster.OnAtlasImageError(this, atlasIndex, (int)result.Error, result.ErrorMessage);
@@ -78,13 +83,24 @@ namespace Hactazia.Posters {
 			for (var i = 0; i < posters.Length; i++)
 				posters[i].OnMetadataLoaded(this, data, i);
 
-			var m = new VRCImageDownloader();
-			foreach (var index in GetAllAtlasIndices()) {
-				var atlasUrl = index < 0 || index >= atlasUrls.Length ? null : atlasUrls[index];
-				if (atlasUrl == null || string.IsNullOrEmpty(atlasUrl.Get())) continue;
-				// ReSharper disable once SuspiciousTypeConversion.Global
-				m.DownloadImage(atlasUrl, material, (IUdonEventReceiver)this, new TextureInfo());
+			NextUrl();
+		}
+
+		private void NextUrl() {
+			if (atlasUrls == null || atlasUrls.Length == 0) return;
+			var nextIndex = GetAllAtlasIndices();
+			if (nextIndex.Length == 0) {
+				Debug.Log("PosterManager: No atlas indices found to load next URL.");
+				return;
 			}
+
+			var atlasUrl = nextIndex[0] < 0 || nextIndex[0] >= atlasUrls.Length ? null : atlasUrls[nextIndex[0]];
+			if (atlasUrl == null || string.IsNullOrEmpty(atlasUrl.Get())) {
+				Debug.LogWarning("PosterManager: Invalid atlas URL for index " + nextIndex[0]);
+				return;
+			}
+
+			m.DownloadImage(atlasUrl, material, (IUdonEventReceiver)this, new TextureInfo());
 		}
 
 		// ReSharper disable UseArrayEmptyMethod
