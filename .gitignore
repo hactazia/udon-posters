@@ -101,4 +101,5 @@ InitTestScene*.unity*
 # Custom ignores for this project
 input_images*
 output_atlases*
+output_static*
 Generator/*.meta

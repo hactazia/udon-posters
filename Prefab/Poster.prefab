@@ -1680,10 +1680,6 @@ MonoBehaviour:
   message: {fileID: 3126567681913474041}
   title: {fileID: 5900911731081657237}
   avatarPedestal: {fileID: 0}
-  redirect: 
-  index: 0
-  current: 0
-  scales: []
 --- !u!114 &1642423849080193478
 MonoBehaviour:
   m_ObjectHideFlags: 0

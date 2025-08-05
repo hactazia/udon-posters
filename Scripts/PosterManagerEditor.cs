@@ -1,80 +1,81 @@
 #if UNITY_EDITOR
-using System;
+using System.Linq;
 using UnityEditor;
-using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.UIElements;
 using VRC.SDKBase;
 
 namespace Hactazia.Posters {
-	[CustomEditor(typeof(PosterManager))]
-	public class PosterManagerEditor : Editor {
-		private const string BaseUrl    = "http://localhost:8000/atlas";
-		private const int    AtlasCount = 128;
+	public static class PosterManagerEditor {
+		internal const string BaseUrl       = "http://localhost:8000/";
+		internal const int    AtlasCount    = 128;
+		private const  double CheckInterval = 1.0;
 
-		private VisualElement        _root;
-		private TextField            _base;
-		private UnsignedIntegerField _count;
-		private PropertyField        _material;
+		private static double _lastCheckTime;
 
-		private PosterManager Manager
-			=> target as PosterManager;
+		private static PosterManager Manager
+			=> Object.FindObjectOfType<PosterManager>();
 
 		private static Poster[] Posters
-			=> FindObjectsOfType<Poster>();
+			=> Object.FindObjectsOfType<Poster>();
 
-		public override VisualElement CreateInspectorGUI() {
-			if (_root != null) return _root;
-			_root = Resources.Load<VisualTreeAsset>("PosterManagerEditor").CloneTree();
-
-			_base        = _root.Q<TextField>("base");
-			_count       = _root.Q<UnsignedIntegerField>("count");
-			_material    = _root.Q<PropertyField>("material");
-			_base.value  = Manager.metaUrl?.Get() ?? BaseUrl;
-			_count.value = (uint)(Manager.atlasUrls?.Length ?? AtlasCount);
-			UpdateContent();
-			_base.RegisterValueChangedCallback(OnBaseChanged);
-			_count.RegisterValueChangedCallback(OnCountChanged);
-			_material.BindProperty(serializedObject.FindProperty(nameof(PosterManager.material)));
-
-			return _root;
+		private static bool UpdatePosters(PosterManager manager) {
+			var findPosters = Posters;
+			var crtPosters  = manager.posters;
+			if (findPosters.Length == crtPosters.Length && !findPosters.Where((t, i) => i >= crtPosters.Length || t != crtPosters[i]).Any())
+				return false;
+			manager.posters = findPosters;
+			return true;
 		}
 
-		private void UpdateContent() {
-			if (_base == null || _count == null) return;
-			var baseUrl = _base.value.TrimEnd('/');
-			if (string.IsNullOrEmpty(baseUrl))
-				baseUrl = BaseUrl;
-			var count = _count.value;
-			if (count < 1)
-				count = AtlasCount;
-			Manager.metaUrl   = new VRCUrl(baseUrl);
-			Manager.atlasUrls = new VRCUrl[count];
-			for (var i = 0; i < count; i++)
-				Manager.atlasUrls[i] = new VRCUrl($"{baseUrl}/{i}");
-			Manager.posters = Posters;
-			_base.SetValueWithoutNotify(baseUrl);
-			_count.SetValueWithoutNotify(count);
-			EditorUtility.SetDirty(Manager);
+		private static bool UpdateUrls(PosterManager manager) {
+			var dirty = false;
+
+			if (string.IsNullOrEmpty(manager.baseUrl)) {
+				manager.baseUrl = BaseUrl;
+				dirty           = true;
+			}
+
+			if (manager.atlasCount < 1) {
+				manager.atlasCount = AtlasCount;
+				dirty              = true;
+			}
+
+			var metaUrl = $"{manager.baseUrl.TrimEnd('/')}/atlas.json";
+			if (!dirty && manager.metaUrl.Get() == metaUrl) return false;
+			manager.metaUrl   = new VRCUrl(metaUrl);
+			manager.atlasUrls = new VRCUrl[manager.atlasCount];
+			for (var i = 0; i < manager.atlasUrls.Length; i++)
+				manager.atlasUrls[i] = new VRCUrl($"{manager.baseUrl.TrimEnd('/')}/atlas/{i}.png");
+
+			return true;
 		}
 
-		private void OnBaseChanged(ChangeEvent<string> evt)
-			=> UpdateContent();
+		private static bool UpdateMaterial(PosterManager manager) {
+			if (manager.material) return false;
+			var material = Resources.Load<Material>("PosterManagerMaterial");
+			if (!material) return false;
+			manager.material = material;
+			return true;
+		}
 
-		private void OnCountChanged(ChangeEvent<uint> evt)
-			=> UpdateContent();
+		private static void OnEditorUpdate() {
+			if (Application.isPlaying) return;
+			if (EditorApplication.timeSinceStartup - _lastCheckTime < CheckInterval) return;
+			_lastCheckTime = EditorApplication.timeSinceStartup;
+			CheckManagerDirty();
+		}
 
-		private static void OnHierarchyChanged() {
-			var manager = FindObjectOfType<PosterManager>();
+		private static void CheckManagerDirty() {
+			var manager = Manager;
 			if (!manager) return;
-			manager.posters = FindObjectsOfType<Poster>();
+			if (!UpdatePosters(manager) && !UpdateUrls(manager) && !UpdateMaterial(manager)) return;
 			EditorUtility.SetDirty(manager);
+			AssetDatabase.SaveAssets();
 		}
 
 		[InitializeOnLoadMethod]
-		public static void Initialize() {
-			EditorApplication.hierarchyChanged += OnHierarchyChanged;
-		}
+		public static void Initialize()
+			=> EditorApplication.update += OnEditorUpdate;
 	}
 }
 #endif

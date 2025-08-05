@@ -5,14 +5,20 @@ using VRC.SDK3.Data;
 using VRC.SDK3.Image;
 using VRC.SDK3.StringLoading;
 using VRC.SDKBase;
+using VRC.Udon.Common.Attributes;
 using VRC.Udon.Common.Interfaces;
 
 namespace Hactazia.Posters {
 	public class PosterManager : UdonSharpBehaviour {
-		public VRCUrl   metaUrl;
-		public VRCUrl[] atlasUrls;
-		public Poster[] posters;
-		public Material material;
+		#if UNITY_EDITOR
+		public string baseUrl    = PosterManagerEditor.BaseUrl;
+		public int    atlasCount = PosterManagerEditor.AtlasCount;
+		#endif
+
+		[HideInInspector] public VRCUrl   metaUrl;
+		[HideInInspector] public VRCUrl[] atlasUrls;
+		[HideInInspector] public Poster[] posters;
+		[HideInInspector] public Material material;
 
 		public override void OnPlayerJoined(VRCPlayerApi player) {
 			if (!player.isLocal) return;
@@ -95,7 +101,7 @@ namespace Hactazia.Posters {
 				var newScales = new int[scales.Length + sc.Length];
 				Array.Copy(scales, newScales, scales.Length);
 				Array.Copy(sc, 0, newScales, scales.Length, sc.Length);
-				scales = newScales; 
+				scales = newScales;
 			}
 
 			if (scales.Length == 0) {

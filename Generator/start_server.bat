@@ -2,8 +2,8 @@
 echo Demarrage du serveur API Atlas...
 echo.
 echo Routes disponibles:
-echo - GET /atlas                    : Donnees JSON completes
-echo - GET /atlas/{index}            : Image atlas par index
+echo - GET /atlas.json              : Donnees JSON completes
+echo - GET /atlas/{index}.png       : Image atlas par index
 echo.
 echo Serveur demarre sur http://localhost:8000
 echo Appuyez sur Ctrl+C pour arreter

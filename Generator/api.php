@@ -108,7 +108,7 @@ $request_uri = $_SERVER['REQUEST_URI'];
 $path = parse_url($request_uri, PHP_URL_PATH);
 
 // Route: GET /atlas - Retourne le fichier JSON complet compressé
-if ($path === '/atlas') {
+if ($path === '/atlas.json') {
     $data = loadAtlasData($json_file);
     $compressed_data = compressAtlasData($data);
     echo json_encode($compressed_data, JSON_PRETTY_PRINT);
@@ -116,7 +116,7 @@ if ($path === '/atlas') {
 }
 
 // Route: GET /atlas/{index} - Retourne l'image de l'atlas contenant l'image à l'index donné (basé sur les métadonnées)
-if (preg_match('/^\/atlas\/(\d+)$/', $path, $matches)) {
+if (preg_match('/^\/atlas\/(\d+).png$/', $path, $matches)) {
     $requested_index = intval($matches[1]);
     $data = loadAtlasData($json_file);
     
@@ -146,13 +146,13 @@ http_response_code(404);
 echo json_encode([
     'error' => 'Route not found',
     'available_routes' => [
-        'GET /atlas' => 'Retourne le fichier JSON complet des atlas',
-        'GET /atlas/{index}' => 'Retourne l\'image de l\'atlas à l\'index donné'
+        'GET /atlas.json' => 'Retourne le fichier JSON complet des atlas',
+        'GET /atlas/{index}.png' => 'Retourne l\'image de l\'atlas à l\'index donné'
     ],
     'examples' => [
-        '/atlas' => 'Données JSON complètes',
-        '/atlas/0' => 'Premier atlas (index 0)',
-        '/atlas/1' => 'Deuxième atlas (index 1)'
+        '/atlas.json' => 'Données JSON complètes',
+        '/atlas/0.png' => 'Premier atlas (index 0)',
+        '/atlas/1.png' => 'Deuxième atlas (index 1)'
     ]
 ], JSON_PRETTY_PRINT);
 ?>

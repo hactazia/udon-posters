@@ -20,29 +20,29 @@ namespace Hactazia.Posters {
 		public TextMeshProUGUI   title;
 		public VRCAvatarPedestal avatarPedestal;
 
-		[HideInInspector] public string   redirect;
-		[HideInInspector] public int      index;
-		[HideInInspector] public int      current;
-		[HideInInspector] public string[] scales;
+		private string   _redirect;
+		private int      _index;
+		private int      _current;
+		private string[] _scales;
 
 		void Start() {
 			animator.SetInteger(Animator.StringToHash("state"), 0);
 		}
 
 		public void OnClick() {
-			if (string.IsNullOrEmpty(redirect)) return;
+			if (string.IsNullOrEmpty(_redirect)) return;
 
-			if (redirect.StartsWith("grp_") && redirect.EndsWith("#store"))
-				Store.OpenGroupStorePage(redirect.Substring(4, redirect.Length - 6));
-			else if (redirect.StartsWith("grp_"))
-				Store.OpenListing(redirect.Substring(4));
-			else if (redirect.StartsWith("prod_"))
-				Store.OpenListing(redirect.Substring(5));
-			else if (redirect.StartsWith("avtr_") && redirect.EndsWith("#listing"))
-				VRCOpenMenu.OpenAvatarListing(redirect.Substring(5));
-			else if (redirect.StartsWith("avtr_") && avatarPedestal)
-				avatarPedestal.SwitchAvatar(redirect);
-			else Debug.LogWarning($"Redirecting to '{redirect}' is not supported in this context.");
+			if (_redirect.StartsWith("grp_") && _redirect.EndsWith("#store"))
+				Store.OpenGroupStorePage(_redirect.Substring(4, _redirect.Length - 6));
+			else if (_redirect.StartsWith("grp_"))
+				Store.OpenListing(_redirect.Substring(4));
+			else if (_redirect.StartsWith("prod_"))
+				Store.OpenListing(_redirect.Substring(5));
+			else if (_redirect.StartsWith("avtr_") && _redirect.EndsWith("#listing"))
+				VRCOpenMenu.OpenAvatarListing(_redirect.Substring(5));
+			else if (_redirect.StartsWith("avtr_") && avatarPedestal)
+				avatarPedestal.SwitchAvatar(_redirect);
+			else Debug.LogWarning($"Redirecting to '{_redirect}' is not supported in this context.");
 		}
 
 		private void SetTexture(Texture2D texture, Rect uv, Vector2 size) {
@@ -72,11 +72,11 @@ namespace Hactazia.Posters {
 			var item = mapping[i].DataDictionary;
 			if (item == null) return;
 			if (item.TryGetValue("url", TokenType.String, out var r))
-				redirect = r.String;
+				_redirect = r.String;
 			if (item.TryGetValue("title", TokenType.String, out var t))
 				title.text = t.String;
 
-			index = i;
+			_index = i;
 
 			// Extract UV data for all scales
 			ExtractScalesData(data, i);
@@ -133,12 +133,12 @@ namespace Hactazia.Posters {
 					+ $",{atlasWidth},{atlasHeight}"
 					+ $",{rectX.ToString(inv)},{rectY.ToString(inv)},{rectWidth.ToString(inv)},{rectHeight.ToString(inv)}"
 					+ $",{width},{height}";
-				current     = Mathf.Max(current, scale * 2);
+				_current     = Mathf.Max(_current, scale * 2);
 				scalesArray = newArray;
 			}
 
 			// Assign to scales
-			scales = scalesArray;
+			_scales = scalesArray;
 		}
 
 		public float GetPriority() {
@@ -157,11 +157,11 @@ namespace Hactazia.Posters {
 		public int[] GetAtlasIndices() {
 			var atlasIndices = new int[0];
 			var atlasScales  = new int[0];
-			foreach (var t in scales) {
+			foreach (var t in _scales) {
 				if (string.IsNullOrEmpty(t)) continue;
 				var parts = t.Split(',');
 				if (parts.Length < 2) continue;
-				if (!int.TryParse(parts[0], out var scale) || scale >= current) continue;
+				if (!int.TryParse(parts[0], out var scale) || scale >= _current) continue;
 				if (!int.TryParse(parts[1], out var atlasIndex)) continue;
 
 				var newArray = new int[atlasIndices.Length + 1];
@@ -201,7 +201,7 @@ namespace Hactazia.Posters {
 		}
 
 		private Rect GetAtlasUV(int atlasIndex) {
-			foreach (var line in scales) {
+			foreach (var line in _scales) {
 				if (string.IsNullOrEmpty(line)) continue;
 				var parts = line.Split(',');
 				if (parts.Length != 10) continue;
@@ -218,7 +218,7 @@ namespace Hactazia.Posters {
 		}
 
 		private Vector2 GetAtlasSize(int atlasIndex) {
-			foreach (var line in scales) {
+			foreach (var line in _scales) {
 				if (string.IsNullOrEmpty(line)) continue;
 				var parts = line.Split(',');
 				if (parts.Length != 10) continue;
@@ -233,7 +233,7 @@ namespace Hactazia.Posters {
 		}
 
 		private int GetAtlasScale(int atlasIndex) {
-			foreach (var line in scales) {
+			foreach (var line in _scales) {
 				if (string.IsNullOrEmpty(line)) continue;
 				var parts = line.Split(',');
 				if (parts.Length < 2) continue;
@@ -248,7 +248,7 @@ namespace Hactazia.Posters {
 		private bool IsUseAtlas(int atlasIndex) {
 			var found = false;
 
-			foreach (var line in scales) {
+			foreach (var line in _scales) {
 				if (string.IsNullOrEmpty(line)) continue;
 				var parts = line.Split(',');
 				if (parts.Length < 2) continue;
@@ -262,12 +262,12 @@ namespace Hactazia.Posters {
 
 		public int[] GetScales() {
 			var scalesArray = new int[0];
-			foreach (var t in scales) {
+			foreach (var t in _scales) {
 				if (string.IsNullOrEmpty(t)) continue;
 				var parts = t.Split(',');
 				if (parts.Length < 1) continue;
-				if (!int.TryParse(parts[0], out var scale) || scale >= current) {
-					Debug.LogWarning($"Poster: Invalid scale '{parts[0]}' in '{t}' for poster '{title}' at index {index}");
+				if (!int.TryParse(parts[0], out var scale) || scale >= _current) {
+					Debug.LogWarning($"Poster: Invalid scale '{parts[0]}' in '{t}' for poster '{title}' at index {_index}");
 					continue;
 				}
 
@@ -283,14 +283,14 @@ namespace Hactazia.Posters {
 		public void OnAtlasImageLoaded(PosterManager posterManager, Texture2D texture, int atlasIndex) {
 			if (!posterManager || !texture || !IsUseAtlas(atlasIndex)) return;
 			var scale = GetAtlasScale(atlasIndex);
-			if (scale >= current) return;
-			current = scale;
+			if (scale >= _current) return;
+			_current = scale;
 			SetTexture(texture, GetAtlasUV(atlasIndex), GetAtlasSize(atlasIndex));
 			animator.SetInteger(Animator.StringToHash("state"), 2);
 		}
 
 		public int GetAtlasIndex(int scale) {
-			if (scale < 0 || scale >= current) return -1;
+			if (scale < 0 || scale >= _current) return -1;
 			var atlasIndices = GetAtlasIndices();
 			if (atlasIndices.Length == 0) return -1;
 
